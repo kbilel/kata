@@ -8,6 +8,7 @@ public class Account {
 	private int id;
 	private double balance;
 	private Date dateCreated;
+	private ArrayList<Transaction> transactions;
 	
 
 	Account() {
@@ -15,6 +16,7 @@ public class Account {
 		id = 0;
 		balance = 0;
 		dateCreated = new Date(); 
+		transactions = new ArrayList<Transaction>();
 	}
 
 	Account(int id, double balance) {
@@ -22,6 +24,7 @@ public class Account {
 		this.id = id;
 		this.balance = balance;
 		dateCreated = new Date();
+		transactions = new ArrayList<Transaction>();
 	}
 
 
@@ -32,11 +35,14 @@ public class Account {
 
 	public void withdraw(double amount) {
 		balance -= amount;
-		;
+		transactions.add(new Transaction('W', amount, balance, 
+				"Withdrawal"));
 	}
 
 	public void deposit(double amount) {
 		balance += amount;
+		transactions.add(new Transaction('D', amount, balance, 
+				"Deposit"));
 	
 	}
 	
@@ -69,6 +75,18 @@ public class Account {
 
 	public String getDateCreated() {
 		return dateCreated.toString();
+	}
+
+	public ArrayList<Transaction> getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(ArrayList<Transaction> transactions) {
+		this.transactions = transactions;
+	}
+
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
 	}
 
 	
