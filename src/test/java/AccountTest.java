@@ -9,8 +9,8 @@ public class AccountTest {
 	@Test
 	public void bank_manager_should_add_balance_when_deposit() throws Exception {
 		Account account = new Account("bilel", 01, 2000);
-		account.deposit(15);
-assertEquals(2015, account.getBalance(),0);
+		account.deposit(14);
+assertEquals(2014, account.getBalance(),0);
 
 	}
 
