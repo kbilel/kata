@@ -11,7 +11,7 @@ public class Account {
 	private ArrayList<Transaction> transactions;
 	
 
-	Account() {
+	public Account() {
 		name = "";
 		id = 0;
 		balance = 0;
@@ -19,7 +19,7 @@ public class Account {
 		transactions = new ArrayList<Transaction>();
 	}
 
-	Account(int id, double balance) {
+	public Account(int id, double balance) {
 		name = "";
 		this.id = id;
 		this.balance = balance;
@@ -28,21 +28,34 @@ public class Account {
 	}
 
 
-	Account(String name, int id, double balance) {
+	public Account(String name, int id, double balance) {
 		this(id, balance);
 		this.name = name;
 	}
 
 	public void withdraw(double amount) {
-		balance -= amount;
-		transactions.add(new Transaction('W', amount, balance, 
-				"Withdrawal"));
+		
+		
+		if(balance-amount<0) throw new NegativeAmountException("No enough balance ");
+		else if (amount <0)throw new NegativeAmountException("Witdhrawal amount can't be negatives ");
+		 else  
+		 {
+			 balance -= amount;
+				transactions.add(new Transaction( amount, balance, 
+						TransactionType.WITHDRAWL.toString()));
+		 }
 	}
 
-	public void deposit(double amount) {
+	public void deposit(double amount) throws NegativeAmountException {
+		
+		if(amount<0) throw new NegativeAmountException("Deposit Amount can't be  negative");
+		else if  (balance>0 && amount>0) {
 		balance += amount;
-		transactions.add(new Transaction('D', amount, balance, 
-				"Deposit"));
+		transactions.add(new Transaction(amount, balance, 
+				TransactionType.DEPOSIT.toString()));
+		}
+		else throw new NegativeAmountException("No enough balance");
+		
 	
 	}
 	
@@ -89,7 +102,10 @@ public class Account {
 		this.dateCreated = dateCreated;
 	}
 
-	
+	public enum TransactionType {
+	    WITHDRAWL,
+	    DEPOSIT
+	}
 
 
 

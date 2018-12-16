@@ -4,9 +4,8 @@ public class Transaction {
 	private double amount;
 	private double balance;
 	private String detail;
-
 	
-	public Transaction(char type, double amount, 
+	public Transaction(double amount, 
 		double balance, String detail) {
 		date = new java.util.Date();
 		this.amount = amount;
@@ -28,7 +27,7 @@ public class Transaction {
 		return amount;
 	}
 
-	public void setBalance(double balance) {
+	private void setBalance(double balance) {
 		this.balance = balance;
 	}
 
@@ -36,7 +35,7 @@ public class Transaction {
 		return balance;
 	}
 
-	public void setDetail(String detail) {
+	private void setDetail(String detail) {
 		this.detail = detail;
 	}
 
